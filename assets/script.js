@@ -9,7 +9,7 @@ var answerResult = document.getElementById(`answer-result`);
 var quizBox = document.getElementById(`quiz-box`);
 var results = document.querySelector(`.results`);
 var scorePage = document.getElementById(`score`);
-var quizQuestion = document.getElementById(`quiz-question`);
+var quizQuestion = document.getElementById(`questions`);
 var scoreLink = document.getElementById("score-link");
 var quizButtons = document.querySelectorAll(`.quizButtons`);
 var submitHS = document.getElementById(`submitHS`);
@@ -18,4 +18,14 @@ var form = document.getElementById(`form`);
 var initials = document.getElementById(`initials`);
 var submitHS = document.getElementById(`submitHS`);
 var leaderboard = document.getElementById(`leaderboard`);
+
+//Setting default values to global scope for quiz 
+var totalScore = 0;
+started = false;
+var correctAnswer;
+
+// Takes user to see highscores
+scoreLink.addEventListener(`click`, function () {
+    userHighScores();
+})
 
