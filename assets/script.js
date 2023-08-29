@@ -5,6 +5,7 @@ var q1 = document.querySelector(`#q1`);
 var q2 = document.querySelector(`#q2`);
 var q3 = document.querySelector(`#q3`);
 var q4 = document.querySelector(`#q4`);
+var q5 = document.querySelector(`#q5`);
 var answerResult = document.getElementById(`answer-result`);
 var quizBox = document.getElementById(`quiz-box`);
 var results = document.querySelector(`.results`);
@@ -57,4 +58,81 @@ const questions = [
     
 }]
 
+       var checkAnswer = (event) => {
+       uiSwitch(checkAnswer);
+    // using for each to loop through questions
+    quizButtons.forEach(element => {element.addEventListener(`click`, checkAnswer)});
+    const choice = event.target.innerHTML;
+    // Determines whether the button clicked contained the correctAnswer using if statement
+    if (started) {
+        if (choice === correctAnswer) {
+            totalScore += 25;
+            answerResult.style.borderTop = `solid`, `blue`;
+            answerResult.innerHTML = `Correct!<br> Total Score = ${totalScore}/100`
+        } else {
+            secondsLeft -= 15;
+            answerResult.style.borderTop = `solid`, `blue`;
+            answerResult.innerHTML = `Wrong!<br> The correct answer was: <br>${quiz[quizIndex].answer} <br>Total Score = ${totalScore}/100`
+        }
+        quizIndex++
+        if (quizIndex > quiz.length - 1) {
+            showResults();
+        } else {
+            quizQuestion.innerHTML = quiz[quizIndex].question
+            q1.innerHTML = quiz[quizIndex].options[1]
+            q2.innerHTML = quiz[quizIndex].options[2]
+            q3.innerHTML = quiz[quizIndex].options[3]
+            q4.innerHTML = quiz[quizIndex].options[4]
+            q5.innerHTML = quiz[quizIndex].options[5]
+            correctAnswer = quiz[quizIndex].answer
+        }
+        totalScore = 0;
+        quizQuestion.innerHTML = quiz[0].question
+        q1.innerHTML = quiz[0].options[1]
+        q2.innerHTML = quiz[0].options[2]
+        q3.innerHTML = quiz[0].options[3]
+        q4.innerHTML = quiz[0].options[4]
+        q5.innerHTML = quiz[0].options[5]
+        correctAnswer = quiz[0].answer
+        started = true;
+        //Timer starts in the beggining of every quiz
+        setTime();
 
+    }
+}
+startNext.addEventListener(`click`, checkAnswer)
+
+
+// Timer set to count down from 60 seconds
+var stopTimerID;
+// This array contains every iteration of the timer once it has begun
+var stopTimerID_array = [];
+var secondsLeft = 61;
+function setTime() {
+    stopTimerID = window.setInterval(function () {
+        secondsLeft--;
+        updateTimer();
+        if (secondsLeft <= 0) {
+            secondsLeft = 61;
+            timerFailState();
+        }
+    }, 1000)
+    stopTimerID_array.push(stopTimerID);
+}
+// Message on screen of remaining time left
+function updateTimer() {
+    timer.textContent = `${secondsLeft} seconds left!`
+}
+
+function callClearInterval() {
+    for (var i = 0; i < stopTimerID_array.length; i++) {
+        clearInterval(stopTimerID_array[i])
+    };
+}
+function timerFailState() {
+    reset();
+    uiSwitch(timerFailState)
+    quizQuestion.textContent = `Sorry your time has run out!`
+    quizQuestion.style.color = `red`
+    startNext.textContent = `Click Here to Try Again.`
+}
