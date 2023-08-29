@@ -101,9 +101,7 @@ const questions = [
     }
 }
 startNext.addEventListener(`click`, checkAnswer)
-
-
-// Timer set to count down from 60 seconds
+// Timer set 60 seconds
 var stopTimerID;
 // This array contains every iteration of the timer once it has begun
 var stopTimerID_array = [];
@@ -119,11 +117,10 @@ function setTime() {
     }, 1000)
     stopTimerID_array.push(stopTimerID);
 }
-// Message on screen of remaining time left
+//Remaining time left
 function updateTimer() {
     timer.textContent = `${secondsLeft} seconds left!`
 }
-
 function callClearInterval() {
     for (var i = 0; i < stopTimerID_array.length; i++) {
         clearInterval(stopTimerID_array[i])
@@ -136,3 +133,87 @@ function timerFailState() {
     quizQuestion.style.color = `red`
     startNext.textContent = `Click Here to Try Again.`
 }
+//Results
+var showResults = () => {
+    reset();
+    quizQuestion.textContent = `Your Final Score was ${totalScore}/100`
+    startNext.textContent = `Click Here to Try Again`
+}
+// High Score
+var userHighScores = () => {
+    reset();
+    uiSwitch(userHighScores);
+}
+// A reset function 
+    callClearInterval();
+    uiSwitch(reset);
+    secondsLeft = 61;
+    started = false;
+    quizIndex = 0;
+
+function saveHighScore() {
+    var userScoreObject = {
+        user: initials.value.trim(),
+        score: totalScore
+    }
+    localStorage.setItem(`userScoreObject`, JSON.stringify(userScoreObject))
+}
+
+// Pulls users info from local storage
+function renderHighScore() {
+    var highScore = JSON.parse(localStorage.getItem(`userScoreObject`));
+    if (highScore !== null) {
+        document.getElementById('savedHS').innerHTML += `Name: ${highScore.user} | Score: ${highScore.score}<br>`
+    }
+}
+submitHS.addEventListener(`click`, function (e) {
+    e.preventDefault();
+    saveHighScore();
+    renderHighScore();
+    userHighScores();
+});
+function uiSwitch(ui) {
+    if (ui === userHighScores) {
+        leaderboard.removeAttribute(`style`, `display: none;`)
+        results.removeAttribute(`style`, `display: none;`);
+        quizBox.setAttribute(`style`, `display: none;`)
+        scoreLink.setAttribute(`style`, `display: none;`)
+        submitHS.setAttribute(`style`, `display: none;`)
+        resultsQ.textContent = `Code Quiz Leaderboard`
+        form.setAttribute(`style`, `display: none;`)
+    } else if (ui === reset) {
+        answerResult.textContent = '';
+        timer.style.display = `none`;
+        startNext.removeAttribute(`style`, `display: none;`)
+        answerResult.style.borderTop = `none`;
+        results.removeAttribute(`style`, `display: none;`);
+        quizButtons.forEach(element => {
+            element.setAttribute(`style`, `display: none;`)
+        })
+        leaderboard.setAttribute(`style`, `display: none;`)
+    } else if (ui === timerFailState) {
+        results.setAttribute(`style`, `display: none;`)
+    } else if (ui === checkAnswer) {
+        timer.style.display = `block`;
+        startNext.setAttribute(`style`, `display: none;`)
+        quizButtons.forEach(element => {
+            element.removeAttribute(`style`, `display: none;`)
+        })
+        results.setAttribute(`style`, `display: none;`);
+        resultsQ.textContent = `Would you like to record your High Score?`
+        submitHS.removeAttribute(`style`, `display: none;`)
+        form.removeAttribute(`style`, `display: none;`)
+        quizBox.removeAttribute(`style`, `display: none;`)
+        scoreLink.removeAttribute(`style`, `display: none;`)
+    }
+}
+
+// Upon the initial loading of the page clears the local storage memory and hides UI elements
+function init() {
+    localStorage.clear();
+    quizButtons.forEach(element => {
+        element.setAttribute(`style`, `display: none;`)
+    })
+    results.setAttribute(`style`, `display: none;`);
+}
+init();

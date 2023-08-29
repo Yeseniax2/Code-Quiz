@@ -16,10 +16,28 @@
     <main>
         <section id="container">
             <section id="quiz-box">
-                <h2 id="quiz-question">Welcome to the Code Quiz!</h2>
+                <h2 id="questions">Welcome to the Code Quiz!</h2>
                 <button class="quizButtons button" id="b1" data-state="unanswered"></button>
                 <button class="quizButtons button" id="b2" data-state="unanswered"></button>
                 <button class="quizButtons button" id="b3" data-state="unanswered"></button>
                 <button class="quizButtons button" id="b4" data-state="unanswered"></button>
                 <p id="answer-result"></p>
             </section>
+            <section class="results">
+              <h2 id="resultsQ">Would you like to record your High Score?</h2>
+              <form id="form">
+                  <label for="initials">Enter your name</label><br>
+                  <input type="text" id="initials" name="userInitials" value="">
+              </form>
+              <button id="submitHS">Submit High Score</button>
+              <p id="leaderboard">High Scores:<br><br><span id="savedHS"></span></p>
+          </section>
+          <button id="startNext" class="button">Start Quiz</button>
+      </section>
+
+  </main>
+
+  <script src="./assets/script.js"></script>
+</body>
+
+</html>
