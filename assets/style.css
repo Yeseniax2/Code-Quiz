@@ -1,0 +1,133 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: rgb(19, 18, 18);
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: large;
+    padding: 1.4em;
+}
+
+header a {
+    text-decoration: none;
+    color: rgb(174, 189, 100);
+    font-size: 1.2em;
+}
+
+header a:hover {
+    text-shadow: 0 0 5px rgb(246, 246, 245);
+}
+
+header p {
+    color: rgb(174, 189, 100);
+    font-size: 1.1em;
+}
+
+#container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#quiz-box {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: .5em;
+    width: 60vw;
+}
+
+h2 {
+    color: rgb(204, 207, 209);
+    font-size: 2em;
+    margin: 1em;
+    text-align: center;
+
+}
+
+.button {
+    font-size: large;
+    margin: .5em;
+    padding: .7em;
+    width: 50%;
+    word-wrap: break-word;
+    text-align: left;
+    background-color: rgb(174, 189, 100);
+    color: rgb(255, 253, 253);
+    border-radius: .5em;
+}
+
+.button:hover {
+    background-color: rgb(174, 189, 100);
+    box-shadow: 0 0 5px rgb(250, 250, 250);
+}
+
+#quiz-box p {
+    color: rgb(174, 189, 100);
+    font-size: 1.5em;
+    text-align: center;
+    margin: .6em;
+    padding-top: .3em;
+
+}
+
+.results {
+    text-align: center;
+}
+
+#initials {
+    margin: 5em;
+}
+
+#initials:hover {
+    box-shadow: 0 0 1px rgb(174, 189, 100);
+}
+
+.results p {
+    margin: 2em;
+    font-size: 1.5em;
+    color:azure
+}
+label {
+    color: aliceblue;
+}
+
+#startNext {
+    width: 30%;
+    text-align: center;
+    margin-top: 2em;
+}
+
+/* media query for smaller devices */
+@media screen and (max-width: 480px) {
+
+    #quiz-question {
+        color: rgb(174, 189, 100);
+        font-size: 90%;
+    }
+
+    .results span {
+        font-size: 80%;
+    }
+
+    header p {
+        font-size: 80%;
+    }
+
+    #quiz-box p {
+        font-size: 80%;
+    }
+
+    .button {
+        font-size: 80%;
+        width: 100%;
+    }
+}
