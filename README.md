@@ -6,3 +6,5 @@ Here will be  preview on how the quiz should look on home page and once started
 ![Alt text](images/image.png)
 
 ![Alt text](images/image-1.png)
+# Deployed url
+https://yeseniax2.github.io/Code-Quiz/
