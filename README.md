@@ -7,5 +7,5 @@ To be able to take the quiz I have attached the deployed website and screen shot
 
 ### When quiz has started preview
 ![Alt text](image-1.png)
-
+ 
 
